@@ -21,4 +21,4 @@ default[:monit][:port] = 3737
 default[:monit][:address] = ""
 default[:monit][:ssl] = false
 default[:monit][:cert] = "/etc/monit/monit.pem"
-default[:monit][:allow] = [""]
+default[:monit][:allow] = ["0.0.0.0/0"]
