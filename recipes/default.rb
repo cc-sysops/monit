@@ -29,5 +29,5 @@ template "/etc/monit/monitrc" do
   mode 0700
   source 'monitrc.erb'
 #	notifies :restart, "runit_service[monit]"
-  notifies :restart, "service[monit]", :delayed
+  notifies :restart, "service[monit]", :delayed 
 end

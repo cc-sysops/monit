@@ -13,14 +13,14 @@ define :monitrc, :action => :enable, :reload => :delayed, :variables => {}, :tem
       source params[:template_source]
       cookbook params[:template_cookbook]
       variables params[:variables]
-      notifies :restart, :service[monit], params[:reload]
+      notifies :restart, "service[monit]", params[:reload]
 #      notifies :restart, resources(:service => "monit"), params[:reload]
       action :create
     end
   else
     template "/etc/monit/conf.d/#{params[:name]}.conf" do
       action :delete
-      notifies :restart, :service[monit], params[:reload]
+      notifies :restart, "service[monit]", params[:reload]
 #      notifies :restart, resources(:service => "monit"), params[:reload]
     end
   end
