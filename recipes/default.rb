@@ -28,6 +28,6 @@ template "/etc/monit/monitrc" do
   group "root"
   mode 0700
   source 'monitrc.erb'
-	notifies :restart, "runit_service[monit]", :delayed
-#  notifies :restart, resources(:service => "monit"), :delayed
+#	notifies :restart, "runit_service[monit]"
+  notifies :restart, "service[monit]", :delayed
 end
