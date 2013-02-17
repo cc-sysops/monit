@@ -9,11 +9,11 @@ if platform?("ubuntu")
   end
 end
 
-service "monit" do
-  action [:enable, :start]
-  enabled true
-  supports [:start, :restart, :stop]
-end
+#service "monit" do
+#  action :start
+#  enabled true
+#  supports [:start, :restart, :stop]
+#end
 
 directory "/etc/monit/conf.d/" do
   owner  'root'
