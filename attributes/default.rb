@@ -1,7 +1,7 @@
 default[:monit][:notify_email]          = "zackzondlo@gmail.com"
 
-default[:monit][:poll_period]           = 60
-default[:monit][:poll_start_delay]      = 120
+default[:monit][:poll_period]           = 15
+default[:monit][:poll_start_delay]      = 20
 
 default[:monit][:mail_format][:subject] = "$SERVICE $EVENT"
 default[:monit][:mail_format][:from]    = "monit@#{node['fqdn']}"
