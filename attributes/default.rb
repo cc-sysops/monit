@@ -1,4 +1,4 @@
-default[:monit][:notify_email]          = "notify@example.com"
+default[:monit][:notify_email]          = "zackzondlo@gmail.com"
 
 default[:monit][:poll_period]           = 60
 default[:monit][:poll_start_delay]      = 120
@@ -18,7 +18,7 @@ default[:monit][:mailserver][:password] = nil
 default[:monit][:mailserver][:password_suffix] = nil
 
 default[:monit][:port] = 3737
-default[:monit][:address] = "localhost"
+default[:monit][:address] = ""
 default[:monit][:ssl] = false
 default[:monit][:cert] = "/etc/monit/monit.pem"
-default[:monit][:allow] = ["localhost"]
+default[:monit][:allow] = [""]
