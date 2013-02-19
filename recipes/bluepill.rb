@@ -7,7 +7,7 @@ runit_service "monit" do
 end
 
 bluepill_service "monit" do
-  action [:enable, :load, :start]
+  action [:enable, :load]
 end
 
 
