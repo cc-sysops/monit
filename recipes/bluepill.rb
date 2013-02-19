@@ -1,6 +1,7 @@
+include_recipe "monit"
 include_recipe "bluepill"
 include_recipe "runit"
-include_recipe "monit"
+
 
 runit_service "monit" do
   default_logger true
