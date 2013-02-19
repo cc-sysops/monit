@@ -1,5 +1,9 @@
 package "monit"
 
+service "monit" do
+  action :nothing
+end
+
 if platform?("ubuntu")
   cookbook_file "/etc/default/monit" do
     source "monit.default"
@@ -23,5 +27,5 @@ template "/etc/monit/monitrc" do
   mode 0700
   source 'monitrc.erb'
 #	notifies :restart, "runit_service[monit]"
-  notifies :restart, "service[monit]", :immediately
+  notifies :restart, "service[monit]"
 end
