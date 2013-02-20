@@ -6,6 +6,11 @@
 define :monitrc, :action => :enable, :reload => :delayed, :variables => {}, :template_cookbook => "monit", :template_source => nil do
   params[:template_source] ||= "#{params[:name]}.conf.erb"
 
+  if node['monit']['init_style'] == 'runit'
+#    include_recipe "runit"
+    include_recipe "monit::runit"
+  end
+
   service_to_notify = case node['monit']['init_style']
                       when "runit"
                         "runit_service[monit]"

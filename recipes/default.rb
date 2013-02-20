@@ -2,7 +2,10 @@ package "monit"
 
 if node['monit']['init_style'] == 'runit'
 #  include_recipe "monit::runit"
-  puts "runit def"
+  runit_service "monit" do
+    default_logger true
+  end
+
 end
 
 service_to_notify = case node['monit']['init_style']
