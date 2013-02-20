@@ -5,6 +5,14 @@
 # template_source: filename of the ERB configuration template, defaults to <LWRP Name>.conf.erb
 define :monitrc, :action => :enable, :reload => :delayed, :variables => {}, :template_cookbook => "monit", :template_source => nil do
   params[:template_source] ||= "#{params[:name]}.conf.erb"
+
+  service_to_notify = case node['monit']['init_style']
+                      when "runit"
+                        "runit_service[monit]"
+                      else
+                        "service[monit]"
+                      end
+
   if params[:action] == :enable
     template "/etc/monit/conf.d/#{params[:name]}.conf" do
       owner "root"
@@ -13,15 +21,17 @@ define :monitrc, :action => :enable, :reload => :delayed, :variables => {}, :tem
       source params[:template_source]
       cookbook params[:template_cookbook]
       variables params[:variables]
-      notifies :restart, "service[monit]", params[:reload]
-#      notifies :restart, resources(:service => "monit"), params[:reload]
+      notifies :restart, service_to_notify, params[:reload]
+#      notifies :restart, "service[monit]", params[:reload]
+#      	notifies :restart, "runit_service[monit]", params[:reload]
       action :create
     end
   else
     template "/etc/monit/conf.d/#{params[:name]}.conf" do
       action :delete
-      notifies :restart, "service[monit]", params[:reload]
-#      notifies :restart, resources(:service => "monit"), params[:reload]
+      notifies :restart, service_to_notify, params[:reload]
+#      notifies :restart, "service[monit]", params[:reload]
+#      	notifies :restart, "runit_service[monit]", params[:reload]
     end
   end
 end

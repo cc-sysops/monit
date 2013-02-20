@@ -1,8 +1,17 @@
 package "monit"
 
-service "monit" do
-  action :nothing
-end
+service_to_notify = case node['monit']['init_style']
+                    when "runit"
+                      "runit_service[monit]"
+                    else
+                      "service[monit]"
+                    end
+
+puts service_to_notify
+
+#service "monit" do
+#  action :nothing
+#end
 
 if platform?("ubuntu")
   cookbook_file "/etc/default/monit" do
@@ -27,5 +36,5 @@ template "/etc/monit/monitrc" do
   mode 0700
   source 'monitrc.erb'
 #	notifies :restart, "runit_service[monit]"
-  notifies :restart, "service[monit]"
+  notifies :restart, service_to_notify
 end

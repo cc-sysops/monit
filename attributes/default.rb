@@ -24,4 +24,4 @@ default[:monit][:cert] = "/etc/monit/monit.pem"
 default[:monit][:allow] = ["0.0.0.0/0"]
 default[:monit][:pid_dir] = "/var/run/monit.pid"
 default[:monit][:log_dir] = "/var/log/monit"
-
+default['monit']['init_style'] = 'runit'
