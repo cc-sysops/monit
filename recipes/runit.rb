@@ -1,4 +1,3 @@
-  puts "runit monit"
 
 include_recipe "runit"
 
