@@ -1,5 +1,10 @@
 package "monit"
 
+if node['monit']['init_style'] == 'runit'
+#  include_recipe "monit::runit"
+  puts "runit def"
+end
+
 service_to_notify = case node['monit']['init_style']
                     when "runit"
                       "runit_service[monit]"
@@ -7,11 +12,6 @@ service_to_notify = case node['monit']['init_style']
                       "service[monit]"
                     end
 
-puts service_to_notify
-
-#service "monit" do
-#  action :nothing
-#end
 
 if platform?("ubuntu")
   cookbook_file "/etc/default/monit" do
